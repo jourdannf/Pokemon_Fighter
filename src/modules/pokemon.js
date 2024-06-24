@@ -7,7 +7,7 @@ export class Pokemon {
     #types = [];
     #url;
     #score = 0;
-    constructor (id, name, url, score){
+    constructor (id, name, url){
         this.#id = id;
         this.#name = name;
         this.#url = url;
@@ -63,7 +63,7 @@ export function makePokemon(id, name, type, url){
 };
 
 export function createPokemonDiv(name, url){
-    const divFrag = document.createDocumentFragment;
+    const divFrag = document.createDocumentFragment();
     const pokemonDiv = divFrag.appendChild(document.createElement("div"));
     const pokemonImg = pokemonDiv.appendChild(document.createElement("img"));
     pokemonImg.setAttribute("src", url);

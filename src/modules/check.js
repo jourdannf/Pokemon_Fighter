@@ -14,13 +14,16 @@ export function checkTypes(type1, type2){
 
         const doubleDamage = typeData.damange_relations.double_damage_to;
         const halfDamage = typeData.damage_relations.half_damage_to;
+        const noDamage = typeData.damage_relations.no_damage_to;
 
         if (doubleDamage.includes(opponent)){
             return 2;
         }else if(halfDamage.includes(opponent)){
             return 0.5;
-        }else {
+        }else if(noDamage.includes(opponent)){
             return 0;
+        }else {
+            return 1;
         }
     }
 
