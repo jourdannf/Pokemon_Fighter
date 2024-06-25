@@ -1,11 +1,13 @@
 import {Pokemon, makePokemon, createPokemonDiv, replacePokemon} from './modules/pokemon.js';
-import { checkTypes } from './modules/check.js';
+import { checkTypes, getTypes } from './modules/check.js';
 
-//Call a fetch to get info based on the Pokemon and turn it into the Pokemon class
+
 
 //Two Promises for the left and right Pokemon
 const leftPokemonPromise = getRandPokemon();
 const rightPokemonPromise = getRandPokemon();
+let leftPokemon;
+let rightPokemon;
 
 Promise.all([leftPokemonPromise, rightPokemonPromise]).then((values)=> {
     const leftPokemon = values[0];
@@ -78,5 +80,36 @@ function searchPokemon(e){
         return new Pokemon(pokemon.id, pokemon.name, pokemon.sprites.other['official-artwork'].front_default);
     }
     
+}
+
+function pokemonBattle(e){
+    //Create the Two Pokemon
+    //Get the types of each pokemon
+    //If both requests resolve then call the check types function in a double for loop
+    //Each time the loop goes around, add to scores for each Pokemon
+
+    let leftPokemonDiv = document.getElementById("leftPokemon");
+    let rightPokemonDiv = document.getElementById("rightPokemon");
+
+    const fighter = new Pokemon;
+    fighter.name = e.currentTarget.firstElementChild.nextElementSibling.textContent;
+    fighter.url = e.currentTarget.firstElementChild.src;
+
+    const opponent = new Pokemon;
+    if (e.currentTarget.id === "leftPokemon"){
+        opponent.name = rightPokemonDiv.firstElementChild.nextElementSibling.textContent;
+        opponent.url = rightPokemonDiv.firstElementChild.src;
+    }else if (e.currentTarget.id === "rightPokemon"){
+        opponent.name = leftPokemonDiv.firstElementChild.nextElementSibling.textContent;
+        opponent.url = leftPokemonDiv.firstElementChild.src;
+    }
+
+    const fighterTypesPromise = getTypes(fighter);
+    const opponentTypesPromise = getTypes(opponent);
+
+    
+
+
+
 }
 

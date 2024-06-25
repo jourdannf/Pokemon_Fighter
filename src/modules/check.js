@@ -32,17 +32,18 @@ export function checkTypes(type1, type2){
     return [damageBtwn(type1,type2), damageBtwn(type2,type1)];
 }
 
+//Returns a promise for a Pokemon that was passed in with updated information about it's types
 export async function getTypes(pokemon){
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}/`);
-    const pokeData = response.json();
+    const pokeData = await response.json();
 
     const types = pokeData.types;
+    types.forEach((type) => {
+        pokemon.addType(type.type.name);
+    });
 
-    console.log(types);
+    console.log(pokemon.types);
+    return pokemon;
 
-    // types.forEach((type, i) => {
-    //     pokemon.addType(type);
-    // });
 }
 
-getTypes("mew");

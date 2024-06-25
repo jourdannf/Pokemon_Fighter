@@ -18,11 +18,24 @@ export class Pokemon {
     get name(){
         return this.#name
     }
+    set name(val){
+        if (typeof val === "string") {
+            this.#name = val; 
+        }
+    }
+    set url(val){
+        if (typeof val === "string") {
+            this.#url = val; 
+        }
+    }
     get url(){
         return this.#url;
     }
     get score(){
         return this.#score;
+    }
+    get types(){
+        return this.#types;
     }
     addType(type){
         //Validate that it's one of the many types a Pokemon can have
@@ -34,12 +47,6 @@ export class Pokemon {
             this.#types.push(type);
         }
 
-        // types.forEeach((type)=> {
-        //     type = type.toLowerCase();
-        //     if (validPokemonTypes.includes(type)){
-        //         this.#types.push(type);
-        //     }
-        // })
     }
     addScore(points){
         if(typeof score === "number"){
