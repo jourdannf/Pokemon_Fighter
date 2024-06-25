@@ -78,6 +78,10 @@ export function createPokemonDiv(name, url){
 //Replaces whichPokemon on screen with replacement
 //Inputs: whichPokemon is the left or right Pokemon, replacement is a Pokemon class
 export function replacePokemon(whichPokemon, replacement){
+    if(document.getElementById("winners").firstElementChild){
+        document.getElementById("winners").firstElementChild.remove()
+    }
+
     let childrenList = document.getElementById(whichPokemon).children;
     
     while(childrenList.length > 1){

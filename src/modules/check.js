@@ -11,6 +11,7 @@ export function checkTypes(type1, type2){
 
     async function damageBtwn(fighter, opponent){
         //Run API on fighter to find out how much damage goes to opponent
+        console.log(fighter);
         const response = await fetch(`https://pokeapi.co/api/v2/type/${fighter}/`);
         const typeData = await response.json();
 

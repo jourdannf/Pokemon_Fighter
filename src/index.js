@@ -71,9 +71,12 @@ function pokemonBattle(e){
     //If both requests resolve then call the check types function in a double for loop
     //Each time the loop goes around, add to scores for each Pokemon
 
+    //Validation: If you're the search button, instantly return
+    if (e.target.nodeName === "INPUT" || e.target.nodeName === "BUTTON") {
+        return;
+    }
+
     const winners = document.getElementById("winners");
-    
-    
 
     let leftPokemonDiv = document.getElementById("leftPokemon");
     let rightPokemonDiv = document.getElementById("rightPokemon");
@@ -102,7 +105,7 @@ function pokemonBattle(e){
 
         for (let i = 0; i < fighter.types.length; i ++){
             for (let j = 0; j < opponent.types.length; j ++){
-               let types = checkTypes(fighter.types[i], opponent.types[i]);
+               let types = checkTypes(fighter.types[i], opponent.types[j]);
                promises.push(types[0]);
                promises.push(types[1]);
             }
@@ -117,7 +120,7 @@ function pokemonBattle(e){
                 }
             }
 
-            if(winners.firstElementChild){
+            if (winners.firstElementChild){
                 winners.firstElementChild.remove();
             }
 

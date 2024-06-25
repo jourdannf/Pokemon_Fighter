@@ -10,28 +10,29 @@
     <script defer type="module" src="./src/index.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-4" id="leftPokemon">
+    <div class="container text-center">
+        <h1 class="text-center">Guess Which Pokemon Is Stronger!</h1>
+        <div class="row mx-auto" style="width:1320px">
+            <div class="col" id="leftPokemon">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Pokemon Name" aria-label="pokeomn-name" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="leftPokemonEnter">Enter</button>
+                      <button class="btn btn-outline-secondary" type="button" id="leftPokemonEnter">Generate</button>
                     </div>
                   </div>
             </div>
-            <div class="col-4" id="rightPokemon">
+            <div class="col" id="rightPokemon">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Pokemon Name" aria-label="pokeomn-name" aria-describedby="basic-addon2" minlength="3">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="rightPokemonEnter">Enter</button>
+                      <button class="btn btn-outline-secondary" type="button" id="rightPokemonEnter">Generate</button>
                     </div>
                   </div>
             </div>
         </div>
-        <div class="row">
-            <button class="btn btn-outline-primary col-9 text-center" id="shuffle" type="button">Shuffle</button>
-            <div class="col-9 text-center" id="winners"></div>
+        <div class="row mx-auto" style="width:1200px">
+            <button class="btn btn-outline-primary col-12 text-center" id="shuffle" type="button">Shuffle</button>
+            <div class="col text-center" id="winners"></div>
         </div>
     </div>
 </body>
