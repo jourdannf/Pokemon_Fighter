@@ -1,3 +1,5 @@
+import { Pokemon } from "./pokemon.js";
+
 //Determines who gets points added onto their score based on the types of Pokemon
 //Checks the damage relation of type1 to type2 and vice versa
 //Returns an array where:
@@ -29,3 +31,18 @@ export function checkTypes(type1, type2){
 
     return [damageBtwn(type1,type2), damageBtwn(type2,type1)];
 }
+
+export async function getTypes(pokemon){
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}/`);
+    const pokeData = response.json();
+
+    const types = pokeData.types;
+
+    console.log(types);
+
+    // types.forEach((type, i) => {
+    //     pokemon.addType(type);
+    // });
+}
+
+getTypes("mew");

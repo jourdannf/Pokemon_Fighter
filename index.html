@@ -12,8 +12,22 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-4" id="leftPokemon"><img src="#" alt=""></div>
-            <div class="col-4" id="rightPokemon"><img src="#" alt=""></div>
+            <div class="col-4" id="leftPokemon">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Pokemon Name" aria-label="pokeomn-name" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="leftPokemonEnter">Enter</button>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-4" id="rightPokemon">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Pokemon Name" aria-label="pokeomn-name" aria-describedby="basic-addon2" minlength="3">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="rightPokemonEnter">Enter</button>
+                    </div>
+                  </div>
+            </div>
         </div>
     </div>
 </body>
