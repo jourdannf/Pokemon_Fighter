@@ -71,6 +71,10 @@ function pokemonBattle(e){
     //If both requests resolve then call the check types function in a double for loop
     //Each time the loop goes around, add to scores for each Pokemon
 
+    const winners = document.getElementById("winners");
+    
+    
+
     let leftPokemonDiv = document.getElementById("leftPokemon");
     let rightPokemonDiv = document.getElementById("rightPokemon");
 
@@ -113,11 +117,21 @@ function pokemonBattle(e){
                 }
             }
 
+            if(winners.firstElementChild){
+                winners.firstElementChild.remove();
+            }
+
+            const winnersText = winners.appendChild(document.createElement("h2"));
+            
+
             if (fighter.score > opponent.score){
+                winnersText.textContent = `${fighter.name} is stronger than ${opponent.name}`;
                 console.log("Fighter Wins!");
             }else if (fighter.score < opponent.score){
+                winnersText.textContent = `${opponent.name} is stronger than ${fighter.name}`;
                 console.log("Opponent Wins!");
             }else {
+                winnersText.textContent = "These pokemon are equal in strength!";
                 console.log("There's been a tie.");
             }
         });
