@@ -49,7 +49,7 @@ export class Pokemon {
 
     }
     addScore(points){
-        if(typeof score === "number"){
+        if(typeof points === "number"){
             this.#score += points;
         }
     }

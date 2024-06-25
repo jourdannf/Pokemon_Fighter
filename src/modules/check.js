@@ -14,7 +14,7 @@ export function checkTypes(type1, type2){
         const response = await fetch(`https://pokeapi.co/api/v2/type/${fighter}/`);
         const typeData = await response.json();
 
-        const doubleDamage = typeData.damange_relations.double_damage_to;
+        const doubleDamage = typeData.damage_relations.double_damage_to;
         const halfDamage = typeData.damage_relations.half_damage_to;
         const noDamage = typeData.damage_relations.no_damage_to;
 
@@ -42,7 +42,6 @@ export async function getTypes(pokemon){
         pokemon.addType(type.type.name);
     });
 
-    console.log(pokemon.types);
     return pokemon;
 
 }

@@ -6,8 +6,6 @@ import { checkTypes, getTypes } from './modules/check.js';
 //Two Promises for the left and right Pokemon
 const leftPokemonPromise = getRandPokemon();
 const rightPokemonPromise = getRandPokemon();
-let leftPokemon;
-let rightPokemon;
 
 Promise.all([leftPokemonPromise, rightPokemonPromise]).then((values)=> {
     const leftPokemon = values[0];
@@ -49,17 +47,7 @@ function searchPokemon(e){
     const pokemonPromise = findPokemon(inputValue.toLowerCase());
 
     pokemonPromise.then((pokemonFound) => {
-        console.log(pokemonFound);
         if (elemId === "leftPokemonEnter"){
-            //Clear left side
-            // let childrenList = document.getElementById("leftPokemon").children;
-            
-            // while(childrenList.length > 1){
-            //     document.getElementById("leftPokemon").removeChild(document.getElementById("leftPokemon").firstChild);
-            // }
-
-            // //Input left side
-            // document.getElementById("leftPokemon").prepend(createPokemonDiv(pokemonFound.name, pokemonFound.url));
 
             replacePokemon("leftPokemon", pokemonFound);
             
@@ -82,6 +70,8 @@ function searchPokemon(e){
     
 }
 
+document.getElementById("leftPokemon").addEventListener("click", pokemonBattle);
+
 function pokemonBattle(e){
     //Create the Two Pokemon
     //Get the types of each pokemon
@@ -91,11 +81,11 @@ function pokemonBattle(e){
     let leftPokemonDiv = document.getElementById("leftPokemon");
     let rightPokemonDiv = document.getElementById("rightPokemon");
 
-    const fighter = new Pokemon;
+    let fighter = new Pokemon;
     fighter.name = e.currentTarget.firstElementChild.nextElementSibling.textContent;
     fighter.url = e.currentTarget.firstElementChild.src;
 
-    const opponent = new Pokemon;
+    let opponent = new Pokemon;
     if (e.currentTarget.id === "leftPokemon"){
         opponent.name = rightPokemonDiv.firstElementChild.nextElementSibling.textContent;
         opponent.url = rightPokemonDiv.firstElementChild.src;
@@ -107,9 +97,43 @@ function pokemonBattle(e){
     const fighterTypesPromise = getTypes(fighter);
     const opponentTypesPromise = getTypes(opponent);
 
-    
+    Promise.all([fighterTypesPromise, opponentTypesPromise]).then((values) => {
+        fighter = values[0];
+        opponent = values[1];
+
+        var promises = [];
+
+        for (let i = 0; i < fighter.types.length; i ++){
+            for (let j = 0; j < opponent.types.length; j ++){
+               let types = checkTypes(fighter.types[i], opponent.types[i]);
+               promises.push(types[0]);
+               promises.push(types[1]);
+            }
+        }
+
+        Promise.all(promises).then((values)=>{
+            for(let i= 0; i < values.length; i ++){
+                if (i%2 === 0) {
+                    fighter.addScore(values[i])
+                }else {
+                    opponent.addScore(values[i]);
+                }
+            }
+            console.log(fighter.score);
+            console.log(opponent.score);
+
+            if (fighter.score > opponent.score){
+                console.log(fighter.score)
+                console.log("Fighter Wins!");
+            }else if (fighter.score < opponent.score){
+                console.log("Opponent Wins!");
+            }else {
+                console.log("There's been a tie.");
+            }
+        });
 
 
+    });
 
 }
 
