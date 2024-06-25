@@ -8,21 +8,37 @@ import { Pokemon } from "./pokemon.js";
 export function checkTypes(type1, type2){
     //Run API to get info on type1
     //Do some for loops to extract how they're affected by type2
+    console.log("checkTypes called");
 
     async function damageBtwn(fighter, opponent){
         //Run API on fighter to find out how much damage goes to opponent
         const response = await fetch(`https://pokeapi.co/api/v2/type/${fighter}/`);
         const typeData = await response.json();
 
-        const doubleDamage = typeData.damage_relations.double_damage_to;
-        const halfDamage = typeData.damage_relations.half_damage_to;
-        const noDamage = typeData.damage_relations.no_damage_to;
+        let doubleDamage = [];
+        let halfDamage = [];
+        let noDamage = [];
+
+        typeData.damage_relations.double_damage_to.forEach((type)=> {
+            doubleDamage.push(type.name);
+        });
+
+        typeData.damage_relations.half_damage_to.forEach((type)=> {
+            halfDamage.push(type.name);
+        });
+
+        typeData.damage_relations.no_damage_to.forEach((type)=> {
+            noDamage.push(type.name);
+        });
 
         if (doubleDamage.includes(opponent)){
+            console.log("Double Damage")
             return 2;
         }else if(halfDamage.includes(opponent)){
+            console.log("half Damage")
             return 0.5;
         }else if(noDamage.includes(opponent)){
+            console.log("no Damage")
             return 0;
         }else {
             return 1;

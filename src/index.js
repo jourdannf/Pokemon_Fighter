@@ -119,11 +119,8 @@ function pokemonBattle(e){
                     opponent.addScore(values[i]);
                 }
             }
-            console.log(fighter.score);
-            console.log(opponent.score);
 
             if (fighter.score > opponent.score){
-                console.log(fighter.score)
                 console.log("Fighter Wins!");
             }else if (fighter.score < opponent.score){
                 console.log("Opponent Wins!");
