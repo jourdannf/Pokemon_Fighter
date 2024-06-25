@@ -8,7 +8,6 @@ import { Pokemon } from "./pokemon.js";
 export function checkTypes(type1, type2){
     //Run API to get info on type1
     //Do some for loops to extract how they're affected by type2
-    console.log("checkTypes called");
 
     async function damageBtwn(fighter, opponent){
         //Run API on fighter to find out how much damage goes to opponent

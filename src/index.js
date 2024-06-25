@@ -1,5 +1,6 @@
 import {Pokemon, makePokemon, createPokemonDiv, replacePokemon} from './modules/pokemon.js';
 import { checkTypes, getTypes } from './modules/check.js';
+import { shuffleTheDeck } from './modules/shuffle.js';
 
 
 
@@ -18,20 +19,18 @@ Promise.all([leftPokemonPromise, rightPokemonPromise]).then((values)=> {
 document.getElementById("leftPokemonEnter").addEventListener("click", searchPokemon);
 document.getElementById("rightPokemonEnter").addEventListener("click", searchPokemon);
 
-async function getRandPokemon(){
+//Returns a promise of a random Pokemon
+export function getRandPokemon(){
     const max = 800;
     const id = Math.floor(Math.random() * max);
 
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-    const pokemon = await response.json();
-    
-    return new Pokemon(pokemon.id, pokemon.name,pokemon.sprites.other['official-artwork'].front_default);
+    return makePokemon(id)
     
 }
 
 function searchPokemon(e){
     //Fetch for a Pokemon
-    //Return automatically if the input value is empty
+    //Return automatically if the input value is less than 3 characters
     //Create an async function that gets the promise for the search
     //Once promise is resolved, create new Pokemon and replace it with the one in the proper div
 
@@ -44,7 +43,7 @@ function searchPokemon(e){
         window.alert("You need to enter the name that is 3 or more characters.");
     }
 
-    const pokemonPromise = findPokemon(inputValue.toLowerCase());
+    const pokemonPromise = makePokemon(inputValue.toLowerCase());
 
     pokemonPromise.then((pokemonFound) => {
         if (elemId === "leftPokemonEnter"){
@@ -60,17 +59,11 @@ function searchPokemon(e){
         window.alert("This is not a valid name of a Pokemon in the Pokedex. Please enter a valid name");
         //Clear Input Value and do Focus
     });
-
-    async function findPokemon(name){//this is the same functionality as getRandPokemon so make it into a function
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
-        const pokemon = await response.json();
-
-        return new Pokemon(pokemon.id, pokemon.name, pokemon.sprites.other['official-artwork'].front_default);
-    }
     
 }
 
 document.getElementById("leftPokemon").addEventListener("click", pokemonBattle);
+document.getElementById("rightPokemon").addEventListener("click", pokemonBattle);
 
 function pokemonBattle(e){
     //Create the Two Pokemon
@@ -134,3 +127,4 @@ function pokemonBattle(e){
 
 }
 
+document.getElementById("shuffle").addEventListener("click", shuffleTheDeck);

@@ -55,22 +55,13 @@ export class Pokemon {
     }
 }
 
-export function makePokemon(id, name, type, url){
+//Returns Pokemon as a promise based on id or name given to function
+export async function makePokemon(id){
 
-    // const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-    // const pokemon = await response.json();
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    const pokemon = await response.json();
 
-    //Create DocumentFragment
-    //Append stuff to Document Fragment from response
-    //Return DocumentFragment
-
-    // const divFrag = document.createDocumentFragment;
-    // const pokemonDiv = divFrag.appendChild(document.createElement("div"));
-    // const pokemonImg = pokemonDiv.appendChild(document.createElement("img"));
-    // pokemonImg.setAttribute("src", pokemon.other["official-artwork"].front_default);
-    // pokemonDiv.appendChild(document.createTextNode(pokemon.name));
-    
-    // return divFrag;
+    return new Pokemon(pokemon.id, pokemon.name, pokemon.sprites.other['official-artwork'].front_default);
 
 };
 
@@ -84,6 +75,8 @@ export function createPokemonDiv(name, url){
     return divFrag;
 }
 
+//Replaces whichPokemon on screen with replacement
+//Inputs: whichPokemon is the left or right Pokemon, replacement is a Pokemon class
 export function replacePokemon(whichPokemon, replacement){
     let childrenList = document.getElementById(whichPokemon).children;
     
